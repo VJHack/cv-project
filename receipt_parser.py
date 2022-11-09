@@ -45,13 +45,6 @@ def make_request():
 	    else:
 	        json_response = response.json()
 	        return json_response
-	        # features, coords = get_features(json_response)
-	        # print("Date:", features["date"])
-	        # print("Time:", features["time"])
-	        # print("Total amount:", features["total_amount"])
-	        # print("Category:", features["category"])
-	        # highlight_features("receipt1.jpg", coords)
-
 json_res = make_request()
 if(json_res != None):
 	parse(json_res)
