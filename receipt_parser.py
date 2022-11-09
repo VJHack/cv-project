@@ -17,12 +17,12 @@ extracted_info = {}
 coords = [[]]
 
 def draw(coordinates, output_img):
-    # step 1: Open the image from path
+    # Open the image
 	cv_image = cv2.imread(output_img)
-    # step 2: create mask image
+    # Create image mask
 	overlay = cv_image.copy()
 	h, w = cv_image.shape[:2]
-    # step 3: Loop on each feature coordinates and draw the feature rectangle on our mask
+    # Iterate through coordinates and draw boxes
 	print(coords)
 	for coord in coords:
 		if(len(coord) == 0):
@@ -30,9 +30,9 @@ def draw(coordinates, output_img):
 		pt1 = (int(w*coord[0][0]), int(h*coord[0][1]))
 		pt2 = (int(w*coord[2][0]), int(h*coord[2][1]))
 		cv2.rectangle(overlay, pt1, pt2, (70, 230, 244), cv2.FILLED)
-    # step 4: Overlay the mask and original image with alpha
+    # Overlay mask and original image with alpha
 	final_image = cv2.addWeighted(overlay, 0.5, cv_image, 0.5, 0)
-    # step 5: Display image to the user
+    # Display the final image
 	cv2.imshow("highlghted_image", cv2.resize(final_image, (400, int(400*h/w))))
 	cv2.waitKey(10000)
 
@@ -63,7 +63,7 @@ def parse(js):
 #     cv2.waitKey(0)
 
 def make_request():
-	with open("receipt1.jpg", "rb") as curfile:
+	with open(sys.argv[1], "rb") as curfile:
 	    file = {"document": curfile}
 	    headers = {"Authorization": "Token 44efd7bbf833e76986f75cce89890a7d"}
 	    response = requests.post(url, files=file, headers=headers)
